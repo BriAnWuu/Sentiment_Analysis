@@ -5,14 +5,22 @@ from bs4 import BeautifulSoup
 
 class GoogleNews:
     def __init__(self, ticker = 'GOOG', topic = False) -> None:
+        '''
+        ticker - company name, default 'GOOG'
+        topic - show BUSINESS news, default False
+        '''
         self.ticker = ticker
         self.topic = topic
         self.feeds, self.error_message = self.__get_feeds()
         
+        # Check if data fetched successfully
         if self.feeds is None:
             print(self.error_message)
 
     def __get_url(self):
+        '''
+        Get Google News RSS feed url 
+        '''
         if self.topic:
             t = 'BUSINESS'
             url = f'https://news.google.com/rss/headlines/section/topic/{t}?q={self.ticker}&hl=en-US&gl=US&ceid=US:en'
@@ -23,10 +31,16 @@ class GoogleNews:
         return url
     
     def __get_feeds(self):
+        '''
+        1. Make GET request and retrieve data as XML file
+        2. Parse XML to find all news feeds (labeled as <item> in XML)
+        3. Handle error events
+        '''
         try:    
             response = requests.get(self.__get_url())
 
             if response.status_code == requests.codes.ok:
+                print('Data successfully loaded.')
                 feeds_xml = BeautifulSoup(response.text, 'xml')
                 feeds = feeds_xml.find_all('item')
                 return feeds, None
@@ -39,6 +53,10 @@ class GoogleNews:
             return None, str(e)
         
     def get_titles(self):
+        '''
+        1. Get all news titles
+        2. Return in List
+        '''
         if self.feeds is None:
             print(self.error_message)
             return None
@@ -47,6 +65,10 @@ class GoogleNews:
             return titles
 
     def get_urls(self):
+        '''
+        1. Get all news urls
+        2. Return in List
+        '''
         if self.feeds is None:
             print(self.error_message)
             return None
@@ -55,6 +77,10 @@ class GoogleNews:
             return urls
 
     def get_sources(self):
+        '''
+        1. Get all news source
+        2. Return in List
+        '''
         if self.feeds is None:
             print(self.error_message)
             return None
@@ -63,6 +89,10 @@ class GoogleNews:
             return sources
         
     def get_dict(self):
+        '''
+        1. Get all news titles, urls, and source
+        2. Return in Dictionary
+        '''
         if self.feeds is None:
             print(self.error_message)
             return None
