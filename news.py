@@ -4,10 +4,12 @@ from bs4 import BeautifulSoup
 #topic = ['WORLD', 'NATION', 'BUSINESS', 'TECHNOLOGY', 'ENTERTAINMENT', 'SCIENCE', 'SPORTS', 'HEALTH']
 
 class GoogleNews:
-    def __init__(self, ticker = 'GOOG', topic = False) -> None:
+    def __init__(self, ticker = 'GOOG', topic = True) -> None:
         '''
         ticker - company name, default 'GOOG'
         topic - show BUSINESS news, default False
+        
+        feeds - created automatically when ticker is provided
         '''
         self.ticker = ticker
         self.topic = topic
@@ -21,11 +23,13 @@ class GoogleNews:
         '''
         Get Google News RSS feed url 
         '''
+        BASE_URL = 'https://news.google.com/rss/'
+
         if self.topic:
             t = 'BUSINESS'
-            url = f'https://news.google.com/rss/headlines/section/topic/{t}?q={self.ticker}&hl=en-US&gl=US&ceid=US:en'
+            url = f'{BASE_URL}headlines/section/topic/{t}?q={self.ticker}&hl=en-US&gl=US&ceid=US:en'
         else:
-            url = f'https://news.google.com/rss/search?q={self.ticker}&hl=en-US&gl=US&ceid=US:en'
+            url = f'{BASE_URL}search?q={self.ticker}&hl=en-US&gl=US&ceid=US:en'
         
         # intitle search
         return url
