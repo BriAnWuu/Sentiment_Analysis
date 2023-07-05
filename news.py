@@ -7,7 +7,7 @@ class GoogleNews:
     def __init__(self, ticker = 'GOOG', topic = True) -> None:
         '''
         ticker - company name, default 'GOOG'
-        topic - show BUSINESS news, default False
+        topic - show BUSINESS news, default True
         
         feeds - created automatically when ticker is provided
         '''
