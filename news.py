@@ -44,9 +44,10 @@ class GoogleNews:
             response = requests.get(self.__get_url())
 
             if response.status_code == requests.codes.ok:
-                print('Data successfully loaded.')
                 feeds_xml = BeautifulSoup(response.text, 'xml')
                 feeds = feeds_xml.find_all('item')
+                n_articles = len(feeds)
+                print(f'Data loaded successfully.\n{n_articles} articles found.')
                 return feeds, None
 
             else:
