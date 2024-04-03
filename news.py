@@ -119,13 +119,15 @@ class GoogleNews:
         return dictionary
 
 
-# ticker = 'AAPL'
-# a = GoogleNews(ticker, True)
-# d = a.get_dict()
-# l = a.get_titles()
-# u = a.get_urls()
-# s = a.get_sources()
-# print(d)
-# print(len(l))
-# print(len(u))
-# print(len(s))
+if __name__ == '__main__':
+    # ticker = 'AAPL'
+    # a = GoogleNews(ticker, True)
+    # d = a.get_dict()
+    # l = a.get_titles()
+    # u = a.get_urls()
+    # s = a.get_sources()
+    # print(d)
+    # print(len(l))
+    # print(len(u))
+    # print(len(s))
+    pass
